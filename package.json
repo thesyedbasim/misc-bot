@@ -1,0 +1,24 @@
+{
+  "name": "misc-discord-bot",
+  "version": "0.1.0",
+  "description": "A fun discord bot to add humor to your servers!",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thesyedbasim/dank-bot.git"
+  },
+  "keywords": [
+    "dank",
+    "discord",
+    "bot"
+  ],
+  "author": "Syed Basim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thesyedbasim/dank-bot/issues"
+  },
+  "homepage": "https://github.com/thesyedbasim/dank-bot#readme"
+}
