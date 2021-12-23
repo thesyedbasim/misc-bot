@@ -1,24 +1,35 @@
 {
-  "name": "misc-discord-bot",
-  "version": "0.1.0",
-  "description": "A fun discord bot to add humor to your servers!",
-  "main": "main.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thesyedbasim/dank-bot.git"
-  },
-  "keywords": [
-    "dank",
-    "discord",
-    "bot"
-  ],
-  "author": "Syed Basim",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thesyedbasim/dank-bot/issues"
-  },
-  "homepage": "https://github.com/thesyedbasim/dank-bot#readme"
+	"name": "misc-discord-bot",
+	"version": "0.1.0",
+	"description": "A fun discord bot to add humor to your servers!",
+	"main": "main.ts",
+	"private": true,
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "ts-node-dev src/main.ts",
+		"build": "tsc",
+		"prestart": "npm run build",
+		"start": "node dist/main.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thesyedbasim/dank-bot.git"
+	},
+	"keywords": [
+		"dank",
+		"discord",
+		"bot"
+	],
+	"author": "Syed Basim",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/thesyedbasim/dank-bot/issues"
+	},
+	"homepage": "https://github.com/thesyedbasim/dank-bot#readme",
+	"dependencies": {
+		"axios": "^0.24.0",
+		"discord.js": "^13.3.1",
+		"dotenv": "^10.0.0",
+		"firebase": "^9.6.1"
+	}
 }
