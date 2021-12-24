@@ -9,7 +9,6 @@
 		"dev": "ts-node-dev src/main.ts",
 		"build": "tsc",
 		"postinstall": "npm run build",
-		"prestart": "npm run build",
 		"start": "node dist/main.js"
 	},
 	"repository": {
