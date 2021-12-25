@@ -9,7 +9,8 @@ export default new Command(
 		syntax: '<message>',
 		missingArgs: 'Please specify a message to vote!',
 		numArgs: { min: 1, max: null },
-		isAsync: true
+		isAsync: true,
+		areNotArgsLowerCase: true
 	},
 	async ({ msg, query }) => {
 		const voteMessage = await msg.channel.send({

@@ -9,7 +9,8 @@ export default new Command(
 		description: 'The easiest way to spam messages in the server!',
 		syntax: '<?times to spam> <msg>',
 		numArgs: { min: 1, max: 1 },
-		missingArgs: 'Please specify the message to spam'
+		missingArgs: 'Please specify the message to spam',
+		areNotArgsLowerCase: true
 	},
 	({ msg, args, query }) => {
 		if (Number.isNaN(+args[0]) || +args[0] <= 0 || args.length === 1) {

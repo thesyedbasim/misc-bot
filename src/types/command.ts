@@ -23,6 +23,7 @@ export class Command {
 			readonly missingArgs?:
 				| string
 				| ((payload: { msg: Message; args: string[] }) => string);
+			readonly areNotArgsLowerCase?: boolean;
 		},
 		private execute: CommandExecuteHandler,
 		readonly interactionsHandler?: {
@@ -31,7 +32,13 @@ export class Command {
 	) {}
 
 	run: (payload: { msg: Message }) => Promise<void> = async ({ msg }) => {
-		const args = msg.content.split(process.env.PREFIX!)[1].split(' ').slice(1);
+		const args = this.payload.areNotArgsLowerCase
+			? msg.content.split(process.env.PREFIX!)[1].split(' ').slice(1)
+			: msg.content
+					.toLowerCase()
+					.split(process.env.PREFIX!)[1]
+					.split(' ')
+					.slice(1);
 		let query = args.join(' ');
 
 		if (args.length < this.payload.numArgs.min && this.payload.missingArgs) {
