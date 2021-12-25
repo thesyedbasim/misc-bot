@@ -22,7 +22,11 @@ export default new Command(
 		}
 
 		if (!searchedCommand) {
-			helpEmbed.setTitle('List of commands');
+			helpEmbed
+				.setTitle('List of Misc Bot commands')
+				.setDescription(
+					`:arrow_right: Use \`${process.env.PREFIX}[command name]\` to use a command.`
+				);
 
 			commandsList.forEach((commands, category) => {
 				helpEmbed.addField(
