@@ -4,12 +4,12 @@ import { commandsListRaw } from './assets/commands-list';
 export const handleMessageCreate = (msg: Message) => {
 	if (msg.author.bot) return;
 
-	if (!msg.content.startsWith(process.env.PREFIX!)) return;
+	if (!msg.content.toLowerCase().startsWith(process.env.PREFIX!)) return;
 
 	commandsListRaw.forEach((command) => {
 		if (
 			command.payload.alias.includes(
-				msg.content.split(process.env.PREFIX!)[1].split(' ')[0]
+				msg.content.toLowerCase().split(process.env.PREFIX!)[1].split(' ')[0]
 			)
 		) {
 			try {
