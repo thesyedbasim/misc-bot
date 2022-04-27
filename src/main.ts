@@ -1,10 +1,11 @@
-import http from 'http';
+// import http from 'http';
 import { config } from 'dotenv';
 import { Client, Intents } from 'discord.js';
 
 import { loadCommands } from './load-commands';
 import { handleInteractionCreate, handleMessageCreate } from './command-base';
-import axios from 'axios';
+import { personalCommandMessageHandler } from './personal-command-handler';
+import { contentReader } from './contentReads/contentReader';
 
 config({ path: 'config.env' });
 
@@ -13,7 +14,8 @@ export const client = new Client({
 		Intents.FLAGS.GUILDS,
 		Intents.FLAGS.GUILD_MESSAGES,
 		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-		Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS
+		Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+		Intents.FLAGS.GUILD_MEMBERS
 	]
 });
 
@@ -29,23 +31,23 @@ client.once('ready', async () => {
 });
 
 client.on('messageCreate', handleMessageCreate);
+
+// BASED ON MESSAGE CONTENT
+client.on('messageCreate', contentReader);
+
+client.on('messageCreate', personalCommandMessageHandler);
+
 client.on('interactionCreate', handleInteractionCreate);
 
 client.login(process.env.DISCORD_BOT_CLIENT_TOKEN);
 
-setInterval(() => {
-	try {
-		axios.get(process.env.HOSTING_URL!);
-	} catch (err) {
-		console.error('NETWORK ERROR', err);
-	}
-}, +process.env.DELAY_SELF_REQUEST! * 60 * 1000);
-
+/*
 http
 	.createServer((_, response) => {
 		response.end('hello');
 	})
 	.listen(process.env.PORT);
+*/
 
 process.on('uncaughtException', (err) => {
 	console.error(err);

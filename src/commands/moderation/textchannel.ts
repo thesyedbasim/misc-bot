@@ -11,7 +11,7 @@ const createChannel: (payload: {
 	channelName: string;
 	guild: Guild;
 }) => Promise<TextChannel> = async ({ channelName, guild }) =>
-	guild.channels.create(channelName);
+	guild.channels.create(channelName, { type: 'GUILD_TEXT' });
 
 const createCategory: (payload: {
 	categoryName: string;

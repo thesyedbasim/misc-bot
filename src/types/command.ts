@@ -1,11 +1,13 @@
 import { Interaction, Message } from 'discord.js';
 import { ServerError } from './serverError';
 import { UserError } from './userError';
+import { PERSONAL_ID } from '../assets/ids';
 
 export interface CommandExecutePayload {
 	msg: Message;
 	args: string[];
 	query: string;
+	aliasUsed: string;
 }
 
 export type CommandExecuteHandler = (
@@ -24,6 +26,7 @@ export class Command {
 				| string
 				| ((payload: { msg: Message; args: string[] }) => string);
 			readonly areNotArgsLowerCase?: boolean;
+			readonly isOwnerOnly?: boolean;
 		},
 		private execute: CommandExecuteHandler,
 		readonly interactionsHandler?: {
@@ -32,6 +35,12 @@ export class Command {
 	) {}
 
 	run: (payload: { msg: Message }) => Promise<void> = async ({ msg }) => {
+		if (this.payload.isOwnerOnly && msg.author.id !== PERSONAL_ID) return;
+
+		const aliasUsed = msg.content
+			.replace(process.env.PREFIX!, '')
+			.split(' ')[0];
+
 		const args = this.payload.areNotArgsLowerCase
 			? msg.content.split(process.env.PREFIX!)[1].split(' ').slice(1)
 			: msg.content
@@ -59,9 +68,9 @@ export class Command {
 
 		try {
 			if (this.payload.isAsync) {
-				await this.execute({ msg, args, query });
+				await this.execute({ msg, args, query, aliasUsed });
 			} else {
-				this.execute({ msg, args, query });
+				this.execute({ msg, args, query, aliasUsed });
 			}
 		} catch (err) {
 			if (err instanceof UserError) {

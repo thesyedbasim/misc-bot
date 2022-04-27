@@ -5,8 +5,8 @@ import { Command } from '../../types/command';
 
 export default new Command(
 	{
-		alias: ['ratio'],
-		description: 'Get the ratio for the latest poll.',
+		alias: ['voteresults', 'vr'],
+		description: 'Get the vote results for the latest poll.',
 		syntax: '',
 		numArgs: { min: 0, max: 0 },
 		isAsync: true
