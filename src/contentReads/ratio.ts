@@ -1,4 +1,5 @@
 import { Message } from 'discord.js';
+import { getRandomNumber } from '../utils/getRandomNumber';
 
 export const ratioHandler = (msg: Message) => {
 	if (
@@ -7,6 +8,13 @@ export const ratioHandler = (msg: Message) => {
 		msg.content.toLowerCase().includes(' ratio') ||
 		msg.content.toLowerCase().includes(' ratio ')
 	) {
-		msg.reply(':100:');
+		const randNum = getRandomNumber(1, 100);
+
+		// 15/100 chance of occuring
+		if (randNum > 85) {
+			msg.reply('no');
+		} else {
+			msg.reply(':100:');
+		}
 	}
 };
